@@ -1,0 +1,66 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "arrow-parens": "warn",
+        "block-spacing": ["warn", "always"],
+        "curly": ["warn", "all"],
+        "max-nested-callbacks": "warn",
+        "max-statements-per-line": "warn",
+        "no-else-return": "warn",
+        "no-multiple-empty-lines": [
+          "warn",
+          {
+            "max": 1,
+            "maxEOF": 1
+          }
+        ],
+        "no-nested-ternary": "warn",
+        "no-unneeded-ternary": "warn",
+        "one-var-declaration-per-line": ["warn", "always"],
+        "operator-assignment": ["warn", "always"]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
+      "rules": {}
+    }
+  ]
+}
