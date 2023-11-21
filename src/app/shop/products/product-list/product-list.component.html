@@ -1,1 +1,16 @@
-<p>product-list works!</p>
+<ul>
+  @for (product of products; track product.id) {
+    <li (click)="onSelected(product.id)">
+      product.productName
+    </li>
+  } @empty {
+    <div class="alert">
+      @if (errorMessage) {
+        {{errorMessage}}
+      } @else {
+        Empty list of products
+      }
+    </div>
+  }
+</ul>
+<app-product-detail [productId]="selectedProductId" />
