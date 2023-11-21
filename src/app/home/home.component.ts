@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LogoComponent } from '../core/components/logo/logo.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgForOf, RouterLink],
+  imports: [NgForOf, RouterLink, LogoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

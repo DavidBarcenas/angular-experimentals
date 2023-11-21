@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  padding: 1rem 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav ul li {
+  --pill-accent: var(--bright-blue);
+  background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+  border-radius: .2rem;
+  display: inline-block;
+  min-width: 6.5rem;
+  margin-left: 1rem;
+  text-align: center;
+  transition: background 0.3s ease;
+
+  &:nth-child(2) {
+    --pill-accent: var(--hot-red);
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+  }
+
+  a {
+    display: block;
+    padding: .5rem 0;
+    color: var(--pill-accent);
+  }
+}
