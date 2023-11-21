@@ -81,9 +81,7 @@
         @for (pill of pills; track pill.title) {
         <a
           class="pill"
-          href="{{ pill.link }}"
-          target="_blank"
-          rel="noopener"
+          routerLink="{{ pill.link }}"
         >
           <span>{{ pill.title }}</span>
           <svg

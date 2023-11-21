@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   title = 'angular-labs';
   pills = [
-    { title: 'Explore the Docs', link: 'https://angular.dev' },
+    { title: 'Shop', link: '/shop' },
     { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
     { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
     { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
