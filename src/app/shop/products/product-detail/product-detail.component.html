@@ -1,13 +1,13 @@
 @if (product) {
-  <section>
-    <h2>{{pageTitle}}</h2>
-    <div>
-      {{product.productName}}
-    </div>
-    <button (click)="addToCart(product)">Add to cart</button>
-  </section>
-} else if(errorMessage) {
-  <div class="alert">
-    {{errorMessage}}
+<section>
+  <h2>{{ pageTitle }}</h2>
+  <div>
+    {{ product.productName }}
   </div>
+  <button (click)="addToCart(product)">Add to cart</button>
+</section>
+} @else if(errorMessage) {
+<div class="alert">
+  {{ errorMessage }}
+</div>
 }
