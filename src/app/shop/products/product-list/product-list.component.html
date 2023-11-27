@@ -1,7 +1,7 @@
 <ul>
   @for (product of products; track product.id) {
     <li (click)="onSelected(product.id)">
-      product.productName
+      {{product.productName}}
     </li>
   } @empty {
     <div class="alert">
