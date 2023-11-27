@@ -4,6 +4,7 @@ import { Product } from '../product.interface';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../service/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -23,7 +24,13 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.productService
       .getProducts()
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((error) => {
+          this.errorMessage = error;
+          return EMPTY;
+        })
+      )
       .subscribe((products) => (this.products = products));
   }
 

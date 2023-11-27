@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, Input, OnChanges, SimpleChanges } from '
 import { Product } from '../product.interface';
 import { ProductService } from '../service/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,7 +26,13 @@ export class ProductDetailComponent implements OnChanges {
     if (id) {
       this.productService
         .getProduct(this.productId)
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        .pipe(
+          takeUntilDestroyed(this.destroyRef),
+          catchError((error) => {
+            this.errorMessage = error;
+            return EMPTY;
+          })
+        )
         .subscribe((product) => (this.product = product));
     }
   }
