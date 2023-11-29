@@ -1,6 +1,5 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Product } from '../product.interface';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../service/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,26 +12,20 @@ import { catchError, EMPTY } from 'rxjs';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent {
   private productService = inject(ProductService);
   private destroyRef = inject(DestroyRef);
 
-  products: Product[] = [];
+  readonly products$ = this.productService.products$.pipe(
+    takeUntilDestroyed(this.destroyRef),
+    catchError((error) => {
+      this.errorMessage = error;
+      return EMPTY;
+    })
+  );
+
   selectedProductId = 0;
   errorMessage = '';
-
-  ngOnInit(): void {
-    this.productService
-      .getProducts()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        catchError((error) => {
-          this.errorMessage = error;
-          return EMPTY;
-        })
-      )
-      .subscribe((products) => (this.products = products));
-  }
 
   onSelected(productId: number): void {
     this.selectedProductId = productId;

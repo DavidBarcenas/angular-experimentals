@@ -15,11 +15,9 @@ export class ProductService {
   private httpErrorService = inject(HttpErrorService);
   private reviewsService = inject(ReviewsService);
 
-  getProducts(): Observable<Product[]> {
-    return this.http
-      .get<Product[]>(this.productsUrl)
-      .pipe(catchError((error) => this.httpErrorService.handleError(error)));
-  }
+  readonly products$ = this.http
+    .get<Product[]>(this.productsUrl)
+    .pipe(catchError((error) => this.httpErrorService.handleError(error)));
 
   getProduct(id: number): Observable<Product> {
     const productURL = `${this.productsUrl}/${id}`;

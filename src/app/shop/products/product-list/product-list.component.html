@@ -1,5 +1,5 @@
 <ul>
-  @for (product of products; track product.id) {
+  @for (product of (products$ | async); track product.id) {
     <li (click)="onSelected(product.id)">
       {{product.productName}}
     </li>
