@@ -1,4 +1,4 @@
-@if (product) {
+@if (product$ | async as product) {
 <section>
   <h2>{{ pageTitle }}</h2>
   <div>

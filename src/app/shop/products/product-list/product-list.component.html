@@ -1,6 +1,6 @@
 <ul>
   @for (product of (products$ | async); track product.id) {
-    <li (click)="onSelected(product.id)">
+    <li (click)="onSelected(product.id)" [ngClass]="{'active': product.id === (selectedProductId$ | async)}">
       {{product.productName}}
     </li>
   } @empty {
@@ -13,4 +13,4 @@
     </div>
   }
 </ul>
-<app-product-detail [productId]="selectedProductId" />
+<app-product-detail />
