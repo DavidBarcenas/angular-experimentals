@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { Product } from '../product.interface';
 import { ProductService } from '../service/product.service';
 import { catchError, EMPTY } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })

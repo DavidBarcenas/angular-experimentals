@@ -14,7 +14,7 @@ export class HomeComponent {
   title = 'angular-labs';
   pills = [
     { title: 'Shop', link: '/shop' },
-    { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
+    { title: 'Task list', link: '/tasks' },
     { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
     { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
     { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },

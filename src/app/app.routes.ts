@@ -6,4 +6,8 @@ export const routes: Routes = [
     path: 'shop',
     loadChildren: () => import('./shop/shop.routes').then((c) => c.routes),
   },
+  {
+    path: 'tasks',
+    loadComponent: () => import('./tasks/tasks.component').then((c) => c.TasksComponent),
+  },
 ];
