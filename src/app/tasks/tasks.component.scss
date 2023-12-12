@@ -1,0 +1,197 @@
+.container {
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.header {
+  background-image: linear-gradient(
+    224deg,
+    hsl(240deg 100% 50%) 2%,
+    hsl(249deg 100% 59%) 63%,
+    hsl(252deg 99% 64%) 78%,
+    hsl(253deg 98% 68%) 87%,
+    hsl(254deg 96% 73%) 92%,
+    hsl(253deg 93% 77%) 96%,
+    hsl(251deg 89% 81%) 98%,
+    hsl(246deg 81% 85%) 99%,
+    hsl(232deg 68% 88%) 100%,
+    hsl(200deg 53% 90%) 100%
+  );
+  color: #fff;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 300;
+  }
+
+  p {
+    margin: 0;
+    padding-bottom: 1.2rem;
+  }
+
+  .new-todo {
+    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    font-size: 24px;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.4em;
+    height: 65px;
+    padding: 2rem;
+    width: 100%;
+  }
+}
+
+.tasks-wrapper {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  top: -40px;
+
+  input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+
+.list li {
+  border-bottom: 1px solid #ededed;
+  font-size: 24px;
+  padding: 0 1rem;
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .toggle {
+    /* auto, since non-WebKit browsers doesn't support input styling */
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: none;
+    text-align: center;
+    width: 40px;
+    /* Mobile Safari */
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 0;
+
+    & + label {
+      background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
+      background-repeat: no-repeat;
+      background-position: center left;
+    }
+
+    &:checked + label {
+      background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%2359A193%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20fill%3D%22%233EA390%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22%2F%3E%3C%2Fsvg%3E');
+    }
+  }
+
+  label {
+    word-break: break-all;
+    padding: 15px 15px 15px 60px;
+    display: block;
+    line-height: 1.2;
+    transition: color 0.4s;
+    font-weight: 400;
+    color: #484848;
+  }
+
+  .edit {
+    border: 1px solid #999;
+    //box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 24px;
+    line-height: 1.4em;
+    padding: 6px;
+    width: 100%;
+    display: none;
+  }
+
+  &.completed label {
+    color: #949494;
+    text-decoration: line-through;
+  }
+
+  &.editing {
+    border-bottom: none;
+    padding: 0;
+
+    .edit {
+      display: block;
+      width: calc(100% - 5rem);
+      padding: 12px 16px;
+      margin: 0 0 0 4rem;
+    }
+
+    .content {
+      display: none;
+    }
+  }
+
+  .destroy {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 30px;
+    color: #949494;
+    transition: color 0.2s ease-out;
+  }
+}
+
+.footer {
+  border-top: 1px solid #e6e6e6;
+  font-size: 15px;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .filters {
+    display: flex;
+    gap: .2em;
+
+    li {
+      cursor: pointer;
+      margin: 3px 0;
+      padding: 3px 7px;
+      border: 1px solid transparent;
+
+      &:hover {
+        border-color: #6e49fe;
+      }
+
+      &.selected {
+        border-color: #4c33b1;
+      }
+    }
+  }
+
+  .clear-completed {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}

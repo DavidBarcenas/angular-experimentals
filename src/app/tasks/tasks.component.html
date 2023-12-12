@@ -1,1 +1,72 @@
-<p>tasks works!</p>
+<section>
+  <header class="header">
+    <div class="container">
+      <h1>I have to do</h1>
+      <p>All my tasks in one place</p>
+      <input
+        type="text"
+        class="new-todo"
+      />
+    </div>
+  </header>
+  <div class="container tasks-wrapper">
+    <section class="main">
+      <ul class="list">
+        <li class="completed">
+          <div class="content">
+            <input
+              type="checkbox"
+              checked
+              class="toggle"
+            />
+            <label>Learn JavaScript</label>
+            <button class="destroy"></button>
+          </div>
+          <input
+            class="edit"
+            value="Learn JavaScript"
+          />
+        </li>
+        <li>
+          <div class="content">
+            <input
+              type="checkbox"
+              checked
+              class="toggle"
+            />
+            <label>Learn JavaScript</label>
+            <button class="destroy"></button>
+          </div>
+          <input
+            class="edit"
+            value="Learn JavaScript"
+          />
+        </li>
+        <li class="editing">
+          <div class="content">
+            <input
+              type="checkbox"
+              checked
+              class="toggle"
+            />
+            <label>Learn JavaScript</label>
+            <button class="destroy"></button>
+          </div>
+          <input
+            class="edit"
+            value="Learn JavaScript"
+          />
+        </li>
+      </ul>
+    </section>
+    <footer class="footer">
+      <span><strong>0</strong> item left</span>
+      <ul class="filters">
+        <li class="selected">All</li>
+        <li>Pending</li>
+        <li>Completed</li>
+      </ul>
+      <span class="clear-completed">Clear completed</span>
+    </footer>
+  </div>
+</section>
