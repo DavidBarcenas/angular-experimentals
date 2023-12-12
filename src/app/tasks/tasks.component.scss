@@ -72,6 +72,12 @@
     border-bottom: none;
   }
 
+  &:hover {
+    .destroy {
+      display: block;
+    }
+  }
+
   .toggle {
     /* auto, since non-WebKit browsers doesn't support input styling */
     height: auto;
@@ -143,6 +149,7 @@
   }
 
   .destroy {
+    display: none;
     position: absolute;
     top: 0;
     right: 10px;
@@ -151,8 +158,11 @@
     height: 40px;
     margin: auto 0;
     font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
     color: #949494;
-    transition: color 0.2s ease-out;
+    transition: all 0.2s ease-out;
   }
 }
 

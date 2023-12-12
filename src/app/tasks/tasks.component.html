@@ -14,21 +14,36 @@
     <section class="main">
       <ul class="list">
         @for (task of tasks(); track task; let index = $index) {
-          <li>
-            <div class="content">
-              <input
-                type="checkbox"
-                checked
-                class="toggle"
-              />
-              <label>{{ task }}</label>
-              <button class="destroy" (click)="deleteTask(index)">X</button>
-            </div>
+        <li>
+          <div class="content">
             <input
-              class="edit"
-              value="Learn JavaScript"
+              type="checkbox"
+              checked
+              class="toggle"
             />
-          </li>
+            <label>{{ task }}</label>
+            <button
+              class="destroy"
+              (click)="deleteTask(index)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+              >
+                <path
+                  fill="#494C6B"
+                  fill-rule="evenodd"
+                  d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+                />
+              </svg>
+            </button>
+          </div>
+          <input
+            class="edit"
+            value="Learn JavaScript"
+          />
+        </li>
         }
       </ul>
     </section>
