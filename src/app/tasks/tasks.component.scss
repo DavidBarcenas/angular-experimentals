@@ -1,6 +1,6 @@
 .container {
   min-width: 230px;
-  max-width: 550px;
+  max-width: 650px;
   margin: 0 auto;
 }
 
@@ -143,7 +143,6 @@
   }
 
   .destroy {
-    display: none;
     position: absolute;
     top: 0;
     right: 10px;
@@ -177,11 +176,12 @@
       border: 1px solid transparent;
 
       &:hover {
-        border-color: #6e49fe;
+        color: #6e49fe;
       }
 
       &.selected {
-        border-color: #4c33b1;
+        color: #4c33b1;
+        font-weight: 600;
       }
     }
   }
@@ -190,8 +190,7 @@
     cursor: pointer;
 
     &:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      color: #6e49fe;;
     }
   }
 }

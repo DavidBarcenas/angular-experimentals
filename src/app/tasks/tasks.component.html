@@ -6,57 +6,30 @@
       <input
         type="text"
         class="new-todo"
+        (keydown.enter)="addTask($event)"
       />
     </div>
   </header>
   <div class="container tasks-wrapper">
     <section class="main">
       <ul class="list">
-        <li class="completed">
-          <div class="content">
+        @for (task of tasks(); track task; let index = $index) {
+          <li>
+            <div class="content">
+              <input
+                type="checkbox"
+                checked
+                class="toggle"
+              />
+              <label>{{ task }}</label>
+              <button class="destroy" (click)="deleteTask(index)">X</button>
+            </div>
             <input
-              type="checkbox"
-              checked
-              class="toggle"
+              class="edit"
+              value="Learn JavaScript"
             />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input
-            class="edit"
-            value="Learn JavaScript"
-          />
-        </li>
-        <li>
-          <div class="content">
-            <input
-              type="checkbox"
-              checked
-              class="toggle"
-            />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input
-            class="edit"
-            value="Learn JavaScript"
-          />
-        </li>
-        <li class="editing">
-          <div class="content">
-            <input
-              type="checkbox"
-              checked
-              class="toggle"
-            />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input
-            class="edit"
-            value="Learn JavaScript"
-          />
-        </li>
+          </li>
+        }
       </ul>
     </section>
     <footer class="footer">
