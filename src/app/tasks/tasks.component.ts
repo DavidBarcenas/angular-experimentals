@@ -1,10 +1,11 @@
 import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { Task } from './task.model';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
 })
@@ -13,10 +14,12 @@ export class TasksComponent {
   tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
 
   addTask(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    const newTask = new Task(value);
-    this.tasks.update((tasks) => [...tasks, newTask]);
-    this.addInput.nativeElement.value = '';
+    const value = (event.target as HTMLInputElement).value.trim();
+    if (value) {
+      const newTask = new Task(value);
+      this.tasks.update((tasks) => [...tasks, newTask]);
+      this.addInput.nativeElement.value = '';
+    }
   }
 
   deleteTask(id: string) {

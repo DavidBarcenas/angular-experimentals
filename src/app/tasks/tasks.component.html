@@ -1,38 +1,27 @@
 <section>
   <header class="header">
     <div class="container">
-      <h1>I have to do</h1>
+      <h1>My Day</h1>
       <p>All my tasks in one place</p>
-      <input
-        #addInput
-        type="text"
-        class="new-todo"
-        (keydown.enter)="addTask($event)"
-      />
+      <input #addInput type="text" class="new-todo" (keydown.enter)="addTask($event)" />
     </div>
   </header>
   <div class="container tasks-wrapper">
     <section class="main">
       <ul class="list">
         @for (task of tasks(); track task.id) {
-        <li>
+        <li [ngClass]="{'completed': task.completed, 'editing': task.editing}">
           <div class="content">
             <input
               [checked]="task.completed"
               (change)="updateTask(task.id)"
+              [id]="task.id"
               type="checkbox"
               class="toggle"
             />
-            <label>{{ task.title }}</label>
-            <button
-              class="destroy"
-              (click)="deleteTask(task.id)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-              >
+            <label [for]="task.id">{{ task.title }}</label>
+            <button class="destroy" (click)="deleteTask(task.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
                 <path
                   fill="#494C6B"
                   fill-rule="evenodd"
@@ -41,16 +30,15 @@
               </svg>
             </button>
           </div>
-          <input
-            class="edit"
-            value="Learn JavaScript"
-          />
+          <input class="edit" [value]="task.title" />
         </li>
         }
       </ul>
     </section>
     <footer class="footer">
-      <span><strong>{{tasks().length}}</strong> item left</span>
+      <span>
+        <strong>{{ tasks().length }}</strong> {{ tasks().length > 1 ? 'items' : 'item' }} left
+      </span>
       <ul class="filters">
         <li class="selected">All</li>
         <li>Pending</li>
