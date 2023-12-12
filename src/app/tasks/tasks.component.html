@@ -4,6 +4,7 @@
       <h1>I have to do</h1>
       <p>All my tasks in one place</p>
       <input
+        #addInput
         type="text"
         class="new-todo"
         (keydown.enter)="addTask($event)"
@@ -13,18 +14,19 @@
   <div class="container tasks-wrapper">
     <section class="main">
       <ul class="list">
-        @for (task of tasks(); track task; let index = $index) {
+        @for (task of tasks(); track task.id) {
         <li>
           <div class="content">
             <input
+              [checked]="task.completed"
+              (change)="updateTask(task.id)"
               type="checkbox"
-              checked
               class="toggle"
             />
-            <label>{{ task }}</label>
+            <label>{{ task.title }}</label>
             <button
               class="destroy"
-              (click)="deleteTask(index)"
+              (click)="deleteTask(task.id)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +50,7 @@
       </ul>
     </section>
     <footer class="footer">
-      <span><strong>0</strong> item left</span>
+      <span><strong>{{tasks().length}}</strong> item left</span>
       <ul class="filters">
         <li class="selected">All</li>
         <li>Pending</li>

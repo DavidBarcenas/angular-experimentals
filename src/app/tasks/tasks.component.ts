@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Task } from './task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -8,14 +9,23 @@ import { Component, signal } from '@angular/core';
   styleUrl: './tasks.component.scss',
 })
 export class TasksComponent {
-  tasks = signal(['Learn TypeScript 5.0']);
+  @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
+  tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
 
   addTask(event: Event) {
-    const newTask = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement).value;
+    const newTask = new Task(value);
     this.tasks.update((tasks) => [...tasks, newTask]);
+    this.addInput.nativeElement.value = '';
   }
 
-  deleteTask(idx: number) {
-    this.tasks.update((tasks) => tasks.filter((task, index) => idx !== index));
+  deleteTask(id: string) {
+    this.tasks.update((tasks) => tasks.filter((task) => id !== task.id));
+  }
+
+  updateTask(id: string) {
+    this.tasks.update((tasks) =>
+      tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task))
+    );
   }
 }
