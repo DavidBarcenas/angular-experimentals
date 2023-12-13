@@ -29,7 +29,7 @@
               </svg>
             </button>
           </div>
-          <input #editInput value="hola" (keydown.escape)="deactivateEditMode(task.id)" class="edit" />
+          <input #editInput [value]="task.title" (keydown.escape)="deactivateEditMode(task.id)" (blur)="deactivateEditMode(task.id)" class="edit" />
         </li>
         }
       </ul>

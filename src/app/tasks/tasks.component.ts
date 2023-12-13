@@ -11,7 +11,6 @@ import { NgClass } from '@angular/common';
 })
 export class TasksComponent {
   @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('editInput') editInput!: ElementRef<HTMLInputElement>;
   tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
 
   addTask(event: Event) {
