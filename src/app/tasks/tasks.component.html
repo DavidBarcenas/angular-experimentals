@@ -10,11 +10,14 @@
     <section class="main">
       <ul class="list">
         @for (task of tasks(); track task.id) {
-        <li (dblclick)="activateEditMode(task.id)" [ngClass]="{'completed': task.completed, 'editing': task.editing}">
+        <li
+          (dblclick)="activateEditMode(task.id)"
+          [ngClass]="{ completed: task.completed, editing: task.editing }"
+        >
           <div class="content">
             <input
               [checked]="task.completed"
-              (change)="updateTask(task.id)"
+              (change)="markAsCompleted(task.id)"
               type="checkbox"
               class="toggle"
             />
@@ -29,14 +32,20 @@
               </svg>
             </button>
           </div>
-          <input #editInput [value]="task.title" (keydown.escape)="deactivateEditMode(task.id)" (blur)="deactivateEditMode(task.id)" class="edit" />
+          <input
+            [value]="task.title"
+            (keydown.escape)="deactivateEditMode()"
+            (keydown.enter)="updateTask(task.id, $event)"
+            (blur)="deactivateEditMode()"
+            class="edit"
+          />
         </li>
         }
       </ul>
     </section>
     <footer class="footer">
       <span>
-        <strong>{{ tasks().length }}</strong> {{ tasks().length > 1 ? 'items' : 'item' }} left
+        <strong>{{ tasks().length }}</strong> {{ tasks().length > 1 ? "items" : "item" }} left
       </span>
       <ul class="filters">
         <li class="selected">All</li>
