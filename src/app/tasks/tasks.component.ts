@@ -11,6 +11,7 @@ import { NgClass } from '@angular/common';
 })
 export class TasksComponent {
   @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('editInput') editInput!: ElementRef<HTMLInputElement>;
   tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
 
   addTask(event: Event) {
@@ -29,6 +30,20 @@ export class TasksComponent {
   updateTask(id: string) {
     this.tasks.update((tasks) =>
       tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task))
+    );
+  }
+
+  activateEditMode(id: string) {
+    this.tasks.update((tasks) =>
+      tasks.map((task) =>
+        task.id === id ? { ...task, editing: true } : { ...task, editing: false }
+      )
+    );
+  }
+
+  deactivateEditMode(id: string) {
+    this.tasks.update((tasks) =>
+      tasks.map((task) => (task.id === id ? { ...task, editing: false } : task))
     );
   }
 }

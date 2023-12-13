@@ -1,5 +1,5 @@
 export class Task {
-  id: string;
+  readonly id: string;
   completed: boolean;
   editing: boolean;
   title: string;

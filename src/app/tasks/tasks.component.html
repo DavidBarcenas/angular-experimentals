@@ -10,12 +10,11 @@
     <section class="main">
       <ul class="list">
         @for (task of tasks(); track task.id) {
-        <li [ngClass]="{'completed': task.completed, 'editing': task.editing}">
+        <li (dblclick)="activateEditMode(task.id)" [ngClass]="{'completed': task.completed, 'editing': task.editing}">
           <div class="content">
             <input
               [checked]="task.completed"
               (change)="updateTask(task.id)"
-              [id]="task.id"
               type="checkbox"
               class="toggle"
             />
@@ -30,7 +29,7 @@
               </svg>
             </button>
           </div>
-          <input class="edit" [value]="task.title" />
+          <input #editInput value="hola" (keydown.escape)="deactivateEditMode(task.id)" class="edit" />
         </li>
         }
       </ul>
