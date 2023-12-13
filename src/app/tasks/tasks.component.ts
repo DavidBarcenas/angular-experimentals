@@ -1,17 +1,33 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, signal, ViewChild } from '@angular/core';
 import { Task } from './task.model';
-import { NgClass } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
+
+type Filter = 'all' | 'completed' | 'pending';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, TitleCasePipe],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
 })
 export class TasksComponent {
   @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
+  filters = signal<Filter[]>(['all', 'completed', 'pending']);
+  activeFilter = signal<Filter>('all');
   tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
+  tasksByFilter = computed(() => {
+    return this.tasks().filter((task) => {
+      switch (this.activeFilter()) {
+        case 'completed':
+          return task.completed;
+        case 'pending':
+          return !task.completed;
+        default:
+          return true;
+      }
+    });
+  });
 
   addTask(event: Event): void {
     const value = (event.target as HTMLInputElement).value.trim();
@@ -51,5 +67,13 @@ export class TasksComponent {
 
   deactivateEditMode(): void {
     this.tasks.update((tasks) => tasks.map((task) => ({ ...task, editing: false })));
+  }
+
+  changeFilter(filter: Filter): void {
+    this.activeFilter.set(filter);
+  }
+
+  clearCompleted(): void {
+    this.tasks.update((tasks) => tasks.filter((task) => !task.completed));
   }
 }

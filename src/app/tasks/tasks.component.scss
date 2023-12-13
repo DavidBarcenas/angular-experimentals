@@ -42,6 +42,10 @@
     height: 65px;
     padding: 2rem;
     width: 100%;
+
+    &::placeholder {
+      font-style: italic;
+    }
   }
 }
 

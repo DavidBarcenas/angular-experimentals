@@ -3,13 +3,19 @@
     <div class="container">
       <h1>My Day</h1>
       <p>All my tasks in one place</p>
-      <input #addInput type="text" class="new-todo" (keydown.enter)="addTask($event)" />
+      <input
+        (keydown.enter)="addTask($event)"
+        #addInput
+        type="text"
+        class="new-todo"
+        placeholder="Type new todo"
+      />
     </div>
   </header>
   <div class="container tasks-wrapper">
     <section class="main">
       <ul class="list">
-        @for (task of tasks(); track task.id) {
+        @for (task of tasksByFilter(); track task.id) {
         <li
           (dblclick)="activateEditMode(task.id)"
           [ngClass]="{ completed: task.completed, editing: task.editing }"
@@ -45,14 +51,17 @@
     </section>
     <footer class="footer">
       <span>
-        <strong>{{ tasks().length }}</strong> {{ tasks().length > 1 ? "items" : "item" }} left
+        <strong>{{ tasksByFilter().length }}</strong>
+        {{ tasksByFilter().length > 1 ? "items" : "item" }} left
       </span>
       <ul class="filters">
-        <li class="selected">All</li>
-        <li>Pending</li>
-        <li>Completed</li>
+        @for (filter of filters(); track filter) {
+        <li [ngClass]="{ selected: filter === activeFilter() }" (click)="changeFilter(filter)">
+          {{ filter | titlecase }}
+        </li>
+        }
       </ul>
-      <span class="clear-completed">Clear completed</span>
+      <span class="clear-completed" (click)="clearCompleted()">Clear completed</span>
     </footer>
   </div>
 </section>
