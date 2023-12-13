@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { Task } from './task.model';
 import { NgClass, TitleCasePipe } from '@angular/common';
 
@@ -11,11 +11,11 @@ type Filter = 'all' | 'completed' | 'pending';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
   filters = signal<Filter[]>(['all', 'completed', 'pending']);
   activeFilter = signal<Filter>('all');
-  tasks = signal<Task[]>([new Task('Learn Typescript 5.0')]);
+  tasks = signal<Task[]>([]);
   tasksByFilter = computed(() => {
     return this.tasks().filter((task) => {
       switch (this.activeFilter()) {
@@ -28,6 +28,26 @@ export class TasksComponent {
       }
     });
   });
+
+  constructor() {
+    effect(() => {
+      if (this.tasks().length > 0) {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks()));
+      } else {
+        localStorage.removeItem('tasks');
+      }
+    });
+  }
+
+  ngOnInit() {
+    const storageTasks = localStorage.getItem('tasks');
+    if (storageTasks) {
+      const tasks = JSON.parse(storageTasks);
+      this.tasks.set(tasks);
+    } else {
+      this.tasks.set([new Task('Learn Typescript 5.0')]);
+    }
+  }
 
   addTask(event: Event): void {
     const value = (event.target as HTMLInputElement).value.trim();
