@@ -49,6 +49,7 @@
         }
       </ul>
     </section>
+    @if (tasks().length > 0) {
     <footer class="footer">
       <span>
         <strong>{{ tasksByFilter().length }}</strong>
@@ -63,5 +64,6 @@
       </ul>
       <span class="clear-completed" (click)="clearCompleted()">Clear completed</span>
     </footer>
+    }
   </div>
 </section>

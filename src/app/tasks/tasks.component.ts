@@ -1,8 +1,22 @@
-import { Component, computed, effect, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { Task } from './task.model';
 import { NgClass, TitleCasePipe } from '@angular/common';
 
-type Filter = 'all' | 'completed' | 'pending';
+const storeKey = 'tasks';
+enum Filters {
+  All = 'all',
+  Completed = 'completed',
+  Pending = 'pending',
+}
 
 @Component({
   selector: 'app-tasks',
@@ -10,18 +24,21 @@ type Filter = 'all' | 'completed' | 'pending';
   imports: [NgClass, TitleCasePipe],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksComponent implements OnInit {
   @ViewChild('addInput') addInput!: ElementRef<HTMLInputElement>;
-  filters = signal<Filter[]>(['all', 'completed', 'pending']);
-  activeFilter = signal<Filter>('all');
+
+  filters = signal<Filters[]>([Filters.All, Filters.Completed, Filters.Pending]);
+  activeFilter = signal<Filters>(Filters.All);
   tasks = signal<Task[]>([]);
+
   tasksByFilter = computed(() => {
     return this.tasks().filter((task) => {
       switch (this.activeFilter()) {
-        case 'completed':
+        case Filters.Completed:
           return task.completed;
-        case 'pending':
+        case Filters.Pending:
           return !task.completed;
         default:
           return true;
@@ -32,15 +49,15 @@ export class TasksComponent implements OnInit {
   constructor() {
     effect(() => {
       if (this.tasks().length > 0) {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks()));
+        localStorage.setItem(storeKey, JSON.stringify(this.tasks()));
       } else {
-        localStorage.removeItem('tasks');
+        localStorage.removeItem(storeKey);
       }
     });
   }
 
-  ngOnInit() {
-    const storageTasks = localStorage.getItem('tasks');
+  ngOnInit(): void {
+    const storageTasks = localStorage.getItem(storeKey);
     if (storageTasks) {
       const tasks = JSON.parse(storageTasks);
       this.tasks.set(tasks);
@@ -89,7 +106,7 @@ export class TasksComponent implements OnInit {
     this.tasks.update((tasks) => tasks.map((task) => ({ ...task, editing: false })));
   }
 
-  changeFilter(filter: Filter): void {
+  changeFilter(filter: Filters): void {
     this.activeFilter.set(filter);
   }
 
