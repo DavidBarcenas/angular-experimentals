@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   BehaviorSubject,
   catchError,
+  combineLatest,
   filter,
   map,
   Observable,
@@ -42,6 +43,13 @@ export class ProductService {
         catchError((error) => this.httpErrorService.handleError(error))
       );
     })
+  );
+
+  readonly productFromCache$ = combineLatest([this.products$, this.productSelected$]).pipe(
+    map(([products, id]) => products.find((product) => product.id === id)),
+    filter(Boolean),
+    switchMap((product) => this.getProductWithReviews(product)),
+    catchError((error) => this.httpErrorService.handleError(error))
   );
 
   productSelected(id: number): void {

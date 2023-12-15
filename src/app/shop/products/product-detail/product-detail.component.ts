@@ -14,7 +14,7 @@ import { AsyncPipe } from '@angular/common';
 export class ProductDetailComponent {
   private productService = inject(ProductService);
 
-  product$ = this.productService.product$.pipe(
+  product$ = this.productService.productFromCache$.pipe(
     catchError((error) => {
       this.errorMessage = error;
       return EMPTY;
