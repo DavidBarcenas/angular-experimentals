@@ -1,8 +1,8 @@
-@if (product$ | async; as product) {
+@if (product) {
 <section>
   <h2>{{ pageTitle }}</h2>
   <div>
-    {{ product.productName }}
+    {{ product }}
   </div>
   <button (click)="addToCart(product)">Add to cart</button>
 </section>

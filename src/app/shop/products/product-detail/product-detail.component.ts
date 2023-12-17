@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Product } from '../product.interface';
 import { ProductService } from '../service/product.service';
-import { catchError, EMPTY } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -14,15 +12,17 @@ import { AsyncPipe } from '@angular/common';
 export class ProductDetailComponent {
   private productService = inject(ProductService);
 
-  product$ = this.productService.productFromCache$.pipe(
+  product = false;
+
+  /*product$ = this.productService.productFromCache$.pipe(
     catchError((error) => {
       this.errorMessage = error;
       return EMPTY;
     })
-  );
+  );*/
 
   pageTitle = 'Product Detail for';
   errorMessage = '';
 
-  addToCart(product: Product): void {}
+  addToCart(product: any): void {}
 }
