@@ -1,9 +1,7 @@
 <ul class="list">
   @for (product of (products$ | async); track product.id) {
-    <li (click)="onSelected(product.id)" [ngClass]="{'active': product.id === (selectedProductId$ | async)}">
-      <img [src]="product.images[0]" [alt]="product.title">
-      <h2>{{product.title}}</h2>
-      <p>{{product.description}}</p>
+    <li (click)="onSelected(product.id)">
+      <app-product-card [product]="product" />
     </li>
   } @empty {
     <div class="alert">

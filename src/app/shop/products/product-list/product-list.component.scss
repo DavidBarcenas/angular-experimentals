@@ -1,4 +1,14 @@
+:host {
+  --min-card-size: 300px;
+}
+
 .list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-card-size), 1fr));
+  gap: 2.5rem 1rem;
+  margin-bottom: 2rem;
+
+  @media (min-width: 1600px) {
+    --min-card-size: 500px;
+  }
 }
