@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../service/cart.service';
+import { CartItem } from '../cart';
 
 @Component({
   selector: 'app-cart-shell',
@@ -14,7 +15,17 @@ export class CartShellComponent {
   private cartService = inject(CartService);
   cartItems = this.cartService.cartItems;
 
-  addItems(quantity: number) {
-    console.log(quantity + 1);
+  addQuantity(cartItem: CartItem): void {
+    this.cartService.updateQuantity(cartItem, cartItem.quantity + 1);
+  }
+
+  subtractQuantity(cartItem: CartItem): void {
+    if (cartItem.quantity > 1) {
+      this.cartService.updateQuantity(cartItem, cartItem.quantity - 1);
+    }
+  }
+
+  removeFromCart(cartItem: CartItem): void {
+    this.cartService.removeFromCart(cartItem);
   }
 }

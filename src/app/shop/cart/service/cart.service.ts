@@ -27,4 +27,22 @@ export class CartService {
       ]);
     }
   }
+
+  // Remove the item from the cart
+  removeFromCart(cartItem: CartItem): void {
+    // Update the cart with a new array containing
+    // all but the filtered out deleted item
+    this.cartItems.update((items) =>
+      items.filter((item) => item.product.id !== cartItem.product.id)
+    );
+  }
+
+  // Update the cart quantity
+  updateQuantity(cartItem: CartItem, quantity: number): void {
+    // Update the cart with a new array containing
+    // the updated item and all other original items
+    this.cartItems.update((items) =>
+      items.map((item) => (item.product.id === cartItem.product.id ? { ...item, quantity } : item))
+    );
+  }
 }

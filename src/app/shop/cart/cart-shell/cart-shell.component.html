@@ -16,11 +16,11 @@
               <span>Color: Cream</span>
             </div>
             <div class="cart-item-quantity">
-              <button class="remove">✖️Remove</button>
+              <button (click)="removeFromCart(item)" class="remove">✖️Remove</button>
               <div class="counter">
-                <button>⎻</button>
+                <button (click)="subtractQuantity(item)">⎻</button>
                 <strong>{{item.quantity}}</strong>
-                <button (click)="addItems(item.quantity)">✛</button>
+                <button (click)="addQuantity(item)">✛</button>
               </div>
             </div>
           </div>
