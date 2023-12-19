@@ -4,6 +4,7 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { ProductService } from '../service/product.service';
 import { catchError, EMPTY } from 'rxjs';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -14,6 +15,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 })
 export class ProductListComponent {
   private productService = inject(ProductService);
+  private router = inject(Router);
 
   readonly products$ = this.productService.products$.pipe(
     catchError((error) => {
@@ -28,5 +30,6 @@ export class ProductListComponent {
 
   onSelected(productId: number): void {
     this.productService.productSelected(productId);
+    this.router.navigate(['/shop/product/', productId]);
   }
 }

@@ -1,25 +1,29 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ProductService } from '../service/product.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, CurrencyPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
 export class ProductDetailComponent {
+  @Input()
+  set id(productId: number) {
+    this.productService.productSelected(productId);
+  }
+
   private productService = inject(ProductService);
 
-  product = false;
-
-  /*product$ = this.productService.productFromCache$.pipe(
+  product$ = this.productService.product$.pipe(
     catchError((error) => {
       this.errorMessage = error;
       return EMPTY;
     })
-  );*/
+  );
 
   pageTitle = 'Product Detail for';
   errorMessage = '';

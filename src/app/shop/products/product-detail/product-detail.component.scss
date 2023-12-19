@@ -1,1 +1,80 @@
+.wrapper {
+  display: flex;
+  gap: 3rem;
+  max-width: 1440px;
+  margin: auto;
+  padding-top: 1rem;
+}
 
+.gallery {
+  display: flex;
+  gap: 1.5rem;
+  width: 75%;
+
+  &-sidebar {
+    max-width: 100px;
+  }
+
+  .img-small {
+    margin-bottom: 1.5rem;
+  }
+
+  img {
+    border-radius: .5rem;
+  }
+}
+
+.description {
+  flex-grow: 1;
+  padding-right: 2rem;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    h2 {
+      margin-bottom: .5rem;
+    }
+
+    span {
+      color: #777;
+      display: block;
+      font-size: .85rem;
+    }
+
+    .price {
+      text-align: right;
+
+      span:first-of-type {
+        color: #000;
+        font-size: 1.15rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  p {
+    margin-bottom: 3.5rem;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  button {
+    background: none;
+    border: .1rem solid #000;
+    border-radius: .2rem;
+    cursor: pointer;
+    padding: .5rem 0;
+    width: 50%;
+
+    &:first-child {
+      background: #000;
+      color: #fff;
+    }
+  }
+}
