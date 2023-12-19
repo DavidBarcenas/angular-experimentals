@@ -2,10 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Product } from '../product.interface';
-import { BehaviorSubject, catchError, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, filter, switchMap } from 'rxjs';
 import { HttpErrorService } from '../../utilities/http-error.service';
-
-const maxProductList = 24;
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +13,8 @@ export class ProductService {
   private httpErrorService = inject(HttpErrorService);
   private productSelectedSubject = new BehaviorSubject<number | undefined>(undefined);
 
-  readonly products$ = this.http
-    .get<Product[]>(`${environment.fakeStoreApi}/products`)
-    .pipe(map((products) => products.slice(0, maxProductList)));
+  readonly products$ = this.http.get<Product[]>(`${environment.fakeStoreApi}/products`);
+
   readonly productSelected$ = this.productSelectedSubject.asObservable();
 
   readonly product$ = this.productSelected$.pipe(

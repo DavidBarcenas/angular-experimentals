@@ -4,6 +4,6 @@
   <p>{{product.description}}</p>
   <footer class="card-footer">
     <strong>{{product.price | currency}}</strong>
-    <button>Add to Cart</button>
+    <button (click)="addToCart($event)">Add to Cart</button>
   </footer>
 </div>

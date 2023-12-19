@@ -9,15 +9,20 @@
 .gallery {
   display: flex;
   gap: 1.5rem;
-  width: 75%;
+  width: 60%;
 
   &-sidebar {
     max-width: 100px;
   }
 
+  img {
+    border-radius: .5rem;
+  }
+
   .img-small {
     cursor: pointer;
     margin-bottom: 1.5rem;
+
     &:hover {
       opacity: .9;
     }
@@ -27,14 +32,10 @@
       padding: .2rem;
     }
   }
-
-  img {
-    border-radius: .5rem;
-  }
 }
 
 .description {
-  flex-grow: 1;
+  flex: 1;
   padding-right: 2rem;
 
   header {

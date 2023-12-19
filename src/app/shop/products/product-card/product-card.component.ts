@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../product.interface';
+import { CartService } from '../../cart/service/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -12,4 +13,11 @@ import { Product } from '../product.interface';
 })
 export class ProductCardComponent {
   @Input({ required: true }) product!: Product;
+
+  private cartService = inject(CartService);
+
+  addToCart(event: Event) {
+    event.stopPropagation();
+    this.cartService.addToCart(this.product);
+  }
 }

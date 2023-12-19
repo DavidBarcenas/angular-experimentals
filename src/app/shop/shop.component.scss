@@ -34,3 +34,15 @@
     color: var(--pill-accent);
   }
 }
+
+.counter {
+  background: var(--pill-accent);;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  line-height: 19px;
+  text-align: center;
+}
