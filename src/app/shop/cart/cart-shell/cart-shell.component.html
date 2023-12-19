@@ -2,28 +2,34 @@
   <article class="cart-list">
     <h2>Your Cart</h2>
     <ul>
-      <li class="cart-item">
-        <img src="https://i.imgur.com/YaSqa06.jpeg" alt="">
-        <div class="cart-item-details">
-          <div class="cart-item-title">
-            <h3>Producto</h3>
-            <strong>3000</strong>
-          </div>
-          <div class="cart-item-options">
-            <span>Variant: Oversize</span>
-            <span>Size: XL</span>
-            <span>Color: Cream</span>
-          </div>
-          <div class="cart-item-quantity">
-            <button class="remove">✖️Remove</button>
-            <div class="counter">
-              <button>⎻</button>
-              <strong>2</strong>
-              <button>✛</button>
+      @for (item of cartItems(); track item.product.id) {
+        <li class="cart-item">
+          <img [src]="item.product.images[0]" [alt]="item.product.title">
+          <div class="cart-item-details">
+            <div class="cart-item-title">
+              <h3>{{ item.product.title }}</h3>
+              <strong>{{ item.product.price | currency }}</strong>
+            </div>
+            <div class="cart-item-options">
+              <span>Variant: Oversize</span>
+              <span>Size: XL</span>
+              <span>Color: Cream</span>
+            </div>
+            <div class="cart-item-quantity">
+              <button class="remove">✖️Remove</button>
+              <div class="counter">
+                <button>⎻</button>
+                <strong>{{item.quantity}}</strong>
+                <button (click)="addItems(item.quantity)">✛</button>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
+      } @empty {
+        <li class="empty-list-message">
+          No items in cart
+        </li>
+      }
     </ul>
   </article>
   <aside class="cart-summary">
