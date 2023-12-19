@@ -16,7 +16,16 @@
   }
 
   .img-small {
+    cursor: pointer;
     margin-bottom: 1.5rem;
+    &:hover {
+      opacity: .9;
+    }
+    &.active {
+      border: .1rem solid #999;
+      border-radius: .5rem;
+      padding: .2rem;
+    }
   }
 
   img {
@@ -76,5 +85,14 @@
       background: #000;
       color: #fff;
     }
+  }
+}
+
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

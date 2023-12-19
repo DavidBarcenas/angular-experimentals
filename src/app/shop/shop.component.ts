@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LogoComponent } from '../core/components/logo/logo.component';
 
@@ -8,5 +8,6 @@ import { LogoComponent } from '../core/components/logo/logo.component';
   imports: [RouterOutlet, RouterLink, LogoComponent],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopComponent {}

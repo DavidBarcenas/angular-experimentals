@@ -1,14 +1,15 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core';
 import { ProductService } from '../service/product.service';
-import { AsyncPipe, CurrencyPipe } from '@angular/common';
-import { catchError, EMPTY } from 'rxjs';
+import { AsyncPipe, CurrencyPipe, NgClass } from '@angular/common';
+import { catchError, EMPTY, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [AsyncPipe, CurrencyPipe],
+  imports: [AsyncPipe, CurrencyPipe, NgClass],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent {
   @Input()
@@ -18,15 +19,20 @@ export class ProductDetailComponent {
 
   private productService = inject(ProductService);
 
+  imageSelected = signal<string | undefined>(undefined);
+
   product$ = this.productService.product$.pipe(
+    tap((product) => this.imageSelected.set(product.images[0])),
     catchError((error) => {
       this.errorMessage = error;
       return EMPTY;
     })
   );
-
-  pageTitle = 'Product Detail for';
   errorMessage = '';
+
+  changeImage(image: string): void {
+    this.imageSelected.set(image);
+  }
 
   addToCart(product: any): void {}
 }

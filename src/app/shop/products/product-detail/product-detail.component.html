@@ -4,13 +4,13 @@
     <div class="gallery">
       <figure class="gallery-sidebar">
         @for (image of product.images; track $index) {
-          <figure class="img-small">
+          <figure (click)="changeImage(image)" [class.active]="imageSelected() === image" class="img-small">
             <img [src]="image" [alt]="product.title">
           </figure>
         }
       </figure>
       <figure class="img-full">
-        <img [src]="product.images[0]" [alt]="product.title">
+        <img [src]="imageSelected()" [alt]="product.title">
       </figure>
     </div>
     <article class="description">

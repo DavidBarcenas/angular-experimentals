@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../service/product.service';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   imports: [CommonModule, ProductDetailComponent, ProductCardComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
   private productService = inject(ProductService);
