@@ -14,6 +14,10 @@ import { CartItem } from '../cart';
 export class CartShellComponent {
   private cartService = inject(CartService);
   cartItems = this.cartService.cartItems;
+  subTotal = this.cartService.subTotal;
+  deliveryFee = this.cartService.deliveryFee;
+  tax = this.cartService.tax;
+  total = this.cartService.total;
 
   addQuantity(cartItem: CartItem): void {
     this.cartService.updateQuantity(cartItem, cartItem.quantity + 1);

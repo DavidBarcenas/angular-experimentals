@@ -10,6 +10,17 @@ export class CartService {
   cartItems = signal<CartItem[]>([]);
   // Number of items in the cart
   cartCount = computed(() => this.cartItems().reduce((accQty, item) => accQty + item.quantity, 0));
+  // Total up the extended price for each item
+  subTotal = computed(() =>
+    this.cartItems().reduce((acc, item) => acc + item.product.price * item.quantity, 0)
+  );
+  // Delivery is free if spending more than $100
+  deliveryFee = computed<number>(() =>
+    this.cartItems().length > 0 && this.subTotal() < 100 ? 17.87 : 0
+  );
+  // Tax could be based on shipping address zip code
+  tax = computed(() => Math.round(this.subTotal() * 10.75) / 100);
+  total = computed(() => this.subTotal() + this.deliveryFee() + this.tax());
 
   // Add the vehicle to the cart
   // If the item is already in the cart, increase the quantity
