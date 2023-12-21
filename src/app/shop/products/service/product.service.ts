@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Product } from '../product.interface';
+import { Category, Product } from '../product.interface';
 import { BehaviorSubject, catchError, filter, switchMap } from 'rxjs';
 import { HttpErrorService } from '../../utilities/http-error.service';
 
@@ -22,6 +22,8 @@ export class ProductService {
     switchMap((id) => this.http.get<Product>(`${environment.fakeStoreApi}/products/${id}`)),
     catchError((error) => this.httpErrorService.handleError(error))
   );
+
+  readonly categories$ = this.http.get<Category[]>(`${environment.fakeStoreApi}/categories`);
 
   productSelected(id: number) {
     this.productSelectedSubject.next(id);

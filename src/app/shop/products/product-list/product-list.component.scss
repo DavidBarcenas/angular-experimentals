@@ -12,3 +12,27 @@
     --min-card-size: 500px;
   }
 }
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  &-item a {
+      border: 1px solid #000;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-size: .9rem;
+      padding: .25rem 1rem;
+      text-transform: capitalize;
+      transition: all .25s ease-in-out;
+
+    &.selected,
+    &:hover {
+      background: #000;
+      color: #fff;
+    }
+  }
+}

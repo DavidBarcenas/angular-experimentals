@@ -25,7 +25,7 @@ export class ProductListComponent {
     })
   );
 
-  readonly selectedProductId$ = this.productService.productSelected$;
+  readonly categories$ = this.productService.categories$;
 
   errorMessage = '';
 
