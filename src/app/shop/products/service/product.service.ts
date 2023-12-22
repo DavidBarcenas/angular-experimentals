@@ -12,8 +12,18 @@ export class ProductService {
   private http = inject(HttpClient);
   private httpErrorService = inject(HttpErrorService);
   private productSelectedSubject = new BehaviorSubject<number | undefined>(undefined);
+  private filterByCategorySubject = new BehaviorSubject<string | undefined>(undefined);
+  private filterByCategory$ = this.filterByCategorySubject.asObservable();
 
-  readonly products$ = this.http.get<Product[]>(`${environment.fakeStoreApi}/products`);
+  readonly products$ = this.filterByCategory$.pipe(
+    switchMap((category) => {
+      const url = new URL(`${environment.fakeStoreApi}/products`);
+      if (category) {
+        url.searchParams.set('categoryId', category);
+      }
+      return this.http.get<Product[]>(url.toString());
+    })
+  );
 
   readonly productSelected$ = this.productSelectedSubject.asObservable();
 
@@ -27,5 +37,9 @@ export class ProductService {
 
   productSelected(id: number) {
     this.productSelectedSubject.next(id);
+  }
+
+  filterByCategory(category?: string) {
+    this.filterByCategorySubject.next(category);
   }
 }
