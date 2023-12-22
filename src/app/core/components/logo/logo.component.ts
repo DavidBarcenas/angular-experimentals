@@ -34,44 +34,17 @@ import { RouterLink } from '@angular/router';
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#FF41F8" />
-          <stop
-            offset=".707"
-            stop-color="#FF41F8"
-            stop-opacity=".5"
-          />
-          <stop
-            offset="1"
-            stop-color="#FF41F8"
-            stop-opacity="0"
-          />
+          <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
+          <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
         </radialGradient>
-        <linearGradient
-          id="b"
-          x1="0"
-          x2="982"
-          y1="192"
-          y2="192"
-          gradientUnits="userSpaceOnUse"
-        >
+        <linearGradient id="b" x1="0" x2="982" y1="192" y2="192" gradientUnits="userSpaceOnUse">
           <stop stop-color="#F0060B" />
-          <stop
-            offset="0"
-            stop-color="#F0070C"
-          />
-          <stop
-            offset=".526"
-            stop-color="#CC26D5"
-          />
-          <stop
-            offset="1"
-            stop-color="#7702FF"
-          />
+          <stop offset="0" stop-color="#F0070C" />
+          <stop offset=".526" stop-color="#CC26D5" />
+          <stop offset="1" stop-color="#7702FF" />
         </linearGradient>
         <clipPath id="a">
-          <path
-            fill="#fff"
-            d="M0 0h982v239H0z"
-          />
+          <path fill="#fff" d="M0 0h982v239H0z" />
         </clipPath>
       </defs>
     </svg>

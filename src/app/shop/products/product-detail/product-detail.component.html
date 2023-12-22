@@ -4,27 +4,31 @@
     <div class="gallery">
       <figure class="gallery-sidebar">
         @for (image of product.images; track $index) {
-          <figure (click)="changeImage(image)" [class.active]="imageSelected() === image" class="img-small">
-            <img [src]="image" [alt]="product.title">
-          </figure>
+        <figure
+          (click)="changeImage(image)"
+          [class.active]="imageSelected() === image"
+          class="img-small"
+        >
+          <img [src]="image" [alt]="product.title" />
+        </figure>
         }
       </figure>
       <figure class="img-full">
-        <img [src]="imageSelected()" [alt]="product.title">
+        <img [src]="imageSelected()" [alt]="product.title" />
       </figure>
     </div>
     <article class="description">
       <header>
         <div>
-          <h2>{{product.title}}</h2>
-          <span>{{product.category.name}}</span>
+          <h2>{{ product.title }}</h2>
+          <span>{{ product.category.name }}</span>
         </div>
         <div class="price">
-          <span>{{product.price | currency}}</span>
+          <span>{{ product.price | currency }}</span>
           <span>Inc. taxes</span>
         </div>
       </header>
-      <p>{{product.description}}</p>
+      <p>{{ product.description }}</p>
       <div class="actions">
         <button (click)="addToCart(product)">Add to Cart</button>
         <button>Proceed to Purchase</button>

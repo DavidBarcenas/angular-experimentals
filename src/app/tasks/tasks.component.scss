@@ -181,7 +181,7 @@
 
   .filters {
     display: flex;
-    gap: .2em;
+    gap: 0.2em;
 
     li {
       cursor: pointer;
@@ -204,7 +204,7 @@
     cursor: pointer;
 
     &:hover {
-      color: #6e49fe;;
+      color: #6e49fe;
     }
   }
 }

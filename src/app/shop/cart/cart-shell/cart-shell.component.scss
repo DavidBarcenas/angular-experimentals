@@ -40,18 +40,19 @@
     display: flex;
     justify-content: space-between;
 
-    h3, strong {
+    h3,
+    strong {
       font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
   }
 
   &-options span {
     color: #888;
     display: block;
-    font-size: .9rem;
-    margin-bottom: .25rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
   }
 
   &-quantity {
@@ -86,7 +87,8 @@
   }
 }
 
-.item-summary, .total {
+.item-summary,
+.total {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -106,7 +108,7 @@
   cursor: pointer;
   text-align: center;
   border-radius: 1.5rem;
-  padding: .75rem 0;
+  padding: 0.75rem 0;
   width: 100%;
 }
 

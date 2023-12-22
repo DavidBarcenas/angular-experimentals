@@ -8,10 +8,9 @@ describe('CartShellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CartShellComponent]
-    })
-    .compileComponents();
-    
+      imports: [CartShellComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CartShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

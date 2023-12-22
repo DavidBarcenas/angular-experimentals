@@ -40,9 +40,9 @@
       <li class="item-summary">
         <span>Estimated Delivery & Handling</span>
         @if (cartItems().length > 0) {
-          <strong>{{ deliveryFee() > 0 ? (deliveryFee() | currency) : "Free" }}</strong>
+        <strong>{{ deliveryFee() > 0 ? (deliveryFee() | currency) : "Free" }}</strong>
         } @else {
-          <strong>$0.00</strong>
+        <strong>$0.00</strong>
         }
       </li>
       <li class="item-summary">
@@ -52,7 +52,7 @@
     </ul>
     <div class="total">
       <span>Total</span>
-      <strong>{{ total() | currency}}</strong>
+      <strong>{{ total() | currency }}</strong>
     </div>
     <button class="checkout-btn">Checkout Now</button>
   </aside>
