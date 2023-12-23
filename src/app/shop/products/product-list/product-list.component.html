@@ -1,12 +1,23 @@
 <ul class="category">
   <li class="category-item">
-    <a routerLink="/shop/products" class="selected">All</a>
+    <a
+      routerLink="/shop/products"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="selected"
+    >
+      All
+    </a>
   </li>
   @for (category of (categories$ | async); track category.id) {
   <li class="category-item">
-    <a routerLink="/shop/products" [queryParams]="{ category_id: category.id }">{{
-      category.name
-    }}</a>
+    <a
+      routerLink="/shop/products"
+      [queryParams]="{ category_id: category.id }"
+      routerLinkActive="active"
+    >
+      {{ category.name }}
+    </a>
   </li>
   }
 </ul>

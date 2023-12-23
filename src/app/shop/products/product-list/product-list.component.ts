@@ -4,12 +4,18 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { ProductService } from '../service/product.service';
 import { catchError, EMPTY } from 'rxjs';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, ProductDetailComponent, ProductCardComponent, RouterLink],
+  imports: [
+    CommonModule,
+    ProductDetailComponent,
+    ProductCardComponent,
+    RouterLink,
+    RouterLinkActive,
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

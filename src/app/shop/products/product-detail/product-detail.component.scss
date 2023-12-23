@@ -32,6 +32,11 @@
       padding: 0.2rem;
     }
   }
+
+  .img-full {
+    max-height: 650px;
+    overflow: hidden;
+  }
 }
 
 .description {
