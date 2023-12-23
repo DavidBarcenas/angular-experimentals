@@ -29,13 +29,11 @@ export class ProductListComponent {
   private router = inject(Router);
 
   readonly products = this.productService.products;
-
   readonly categories$ = this.productService.categories$;
 
   errorMessage = '';
 
   onSelected(productId: number): void {
-    this.productService.productSelected(productId);
     this.router.navigate(['/shop/product/', productId]);
   }
 }

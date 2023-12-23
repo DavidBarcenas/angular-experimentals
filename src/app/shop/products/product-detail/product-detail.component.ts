@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { AsyncPipe, CurrencyPipe, NgClass } from '@angular/common';
-import { catchError, EMPTY, tap } from 'rxjs';
 import { CartService } from '../../cart/service/cart.service';
 import { Product } from '../product.interface';
 
@@ -22,19 +21,13 @@ export class ProductDetailComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
 
-  imageSelected = signal<string | undefined>(undefined);
+  imageSelected = this.productService.imageSelected;
+  product = this.productService.product;
 
-  product$ = this.productService.product$.pipe(
-    tap((product) => this.imageSelected.set(product.images[0])),
-    catchError((error) => {
-      this.errorMessage = error;
-      return EMPTY;
-    })
-  );
   errorMessage = '';
 
   changeImage(image: string): void {
-    this.imageSelected.set(image);
+    this.productService.imageSelected.set(image);
   }
 
   addToCart(product: Product): void {
