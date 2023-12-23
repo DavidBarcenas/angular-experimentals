@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../service/product.service';
-import { catchError, EMPTY } from 'rxjs';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -29,12 +28,7 @@ export class ProductListComponent {
   private productService = inject(ProductService);
   private router = inject(Router);
 
-  readonly products$ = this.productService.products$.pipe(
-    catchError((error) => {
-      this.errorMessage = error;
-      return EMPTY;
-    })
-  );
+  readonly products = this.productService.products;
 
   readonly categories$ = this.productService.categories$;
 

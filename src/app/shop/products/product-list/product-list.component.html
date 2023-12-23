@@ -23,7 +23,7 @@
 </ul>
 
 <ul class="list">
-  @for (product of (products$ | async); track product.id) {
+  @for (product of products(); track product.id) {
   <li (click)="onSelected(product.id)">
     <app-product-card [product]="product" />
   </li>

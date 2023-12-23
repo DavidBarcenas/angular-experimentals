@@ -16,3 +16,8 @@ export interface Category {
   creationAt: string;
   updatedAt: string;
 }
+
+export interface Result<T> {
+  data: T | undefined;
+  error?: string;
+}
