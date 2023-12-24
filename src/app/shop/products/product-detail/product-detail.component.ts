@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { AsyncPipe, CurrencyPipe, NgClass } from '@angular/common';
 import { CartService } from '../../cart/service/cart.service';
@@ -12,7 +12,7 @@ import { Product } from '../product.interface';
   styleUrl: './product-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnDestroy {
   @Input()
   set id(productId: number) {
     this.productService.productSelected(productId);
@@ -25,6 +25,10 @@ export class ProductDetailComponent {
   product = this.productService.product;
 
   errorMessage = '';
+
+  ngOnDestroy(): void {
+    this.productService.productSelected(undefined);
+  }
 
   changeImage(image: string): void {
     this.productService.imageSelected.set(image);

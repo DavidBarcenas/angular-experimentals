@@ -2,7 +2,7 @@ import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Category, Product, Result } from '../product.interface';
-import { catchError, filter, map, Observable, of, switchMap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { HttpErrorService } from '../../utilities/http-error.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
@@ -41,9 +41,13 @@ export class ProductService {
   readonly products = computed(() => this.productsResult()?.data);
 
   private productResult$ = toObservable(this.selectedProductId).pipe(
-    filter(Boolean),
-    switchMap((id) => this.http.get<Product>(`${environment.fakeStoreApi}/products/${id}`)),
-    map((product) => ({ data: product })),
+    switchMap((id) =>
+      id ? this.http.get<Product>(`${environment.fakeStoreApi}/products/${id}`) : of(undefined)
+    ),
+    map((product) => {
+      this.imageSelected.set(product?.images[0]);
+      return { data: product };
+    }),
     catchError((error) =>
       of({
         data: undefined,
@@ -57,7 +61,7 @@ export class ProductService {
 
   readonly categories$ = this.http.get<Category[]>(`${environment.fakeStoreApi}/categories`);
 
-  productSelected(id: number): void {
+  productSelected(id: number | undefined): void {
     this.selectedProductId.set(id);
   }
 
