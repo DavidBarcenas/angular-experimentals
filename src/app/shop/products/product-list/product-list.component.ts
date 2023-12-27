@@ -4,6 +4,7 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { ProductService } from '../service/product.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-product-list',
@@ -22,14 +23,15 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class ProductListComponent {
   @Input()
   set category_id(category: string | undefined) {
-    this.productService.filterByCategory(category);
+    this.categoryService.setCategory(category);
   }
 
   private productService = inject(ProductService);
+  private categoryService = inject(CategoryService);
   private router = inject(Router);
 
   readonly products = this.productService.products;
-  readonly categories$ = this.productService.categories$;
+  readonly categories = this.categoryService.categories;
 
   errorMessage = '';
 

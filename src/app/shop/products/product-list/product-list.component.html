@@ -9,7 +9,7 @@
       All
     </a>
   </li>
-  @for (category of (categories$ | async); track category.id) {
+  @for (category of categories(); track category.id) {
   <li class="category-item">
     <a
       routerLink="/shop/products"

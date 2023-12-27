@@ -1,10 +1,11 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Category, Product, Result } from '../product.interface';
+import { Product, Result } from '../product.interface';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { HttpErrorService } from '../../utilities/http-error.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { CategoryService } from './category.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,14 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 export class ProductService {
   private http = inject(HttpClient);
   private httpErrorService = inject(HttpErrorService);
+  private categoryService = inject(CategoryService);
 
-  private category = signal<string | undefined>(undefined);
   private selectedProductId = signal<number | undefined>(undefined);
   imageSelected = signal<string | undefined>(undefined);
 
-  private productsResult$: Observable<Result<Product[]>> = toObservable(this.category).pipe(
+  private productsResult$: Observable<Result<Product[]>> = toObservable(
+    this.categoryService.category
+  ).pipe(
     switchMap((category) => {
       const url = new URL(`${environment.fakeStoreApi}/products`);
       if (category) {
@@ -59,13 +62,7 @@ export class ProductService {
   private productResult = toSignal(this.productResult$);
   product = computed(() => this.productResult()?.data);
 
-  readonly categories$ = this.http.get<Category[]>(`${environment.fakeStoreApi}/categories`);
-
   productSelected(id: number | undefined): void {
     this.selectedProductId.set(id);
-  }
-
-  filterByCategory(category?: string): void {
-    this.category.set(category);
   }
 }
