@@ -1,0 +1,32 @@
+.categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.category__link {
+  border: 1px solid #000;
+  border-radius: 1rem;
+  color: #000;
+  font-size: 0.9rem;
+  padding: 0.25rem 1rem;
+  text-transform: capitalize;
+  transition: all 0.25s ease-in-out;
+
+  &:hover,
+  &.category--selected {
+    background: #000;
+    color: #fff;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.category--selected {
+    cursor: default;
+    pointer-events: none;
+  }
+}

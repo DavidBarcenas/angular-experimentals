@@ -1,0 +1,24 @@
+<ul class="categories">
+  <li>
+    <a
+      routerLink="/shop/products"
+      routerLinkActive="category--selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="category__link"
+    >
+      All
+    </a>
+  </li>
+  @for (category of categories(); track category.id) {
+  <li>
+    <a
+      routerLink="/shop/products"
+      [queryParams]="{ category_id: category.id }"
+      routerLinkActive="category--selected"
+      class="category__link"
+    >
+      {{ category.name }}
+    </a>
+  </li>
+  }
+</ul>
