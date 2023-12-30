@@ -1,28 +1,5 @@
-<ul class="category">
-  <li class="category-item">
-    <a
-      routerLink="/shop/products"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="selected"
-    >
-      All
-    </a>
-  </li>
-  @for (category of categories(); track category.id) {
-  <li class="category-item">
-    <a
-      routerLink="/shop/products"
-      [queryParams]="{ category_id: category.id }"
-      routerLinkActive="active"
-    >
-      {{ category.name }}
-    </a>
-  </li>
-  }
-</ul>
-
-<ul class="list">
+<app-categories />
+<ul class="products">
   @for (product of products(); track product.id) {
   <li (click)="onSelected(product.id)">
     <app-product-card [product]="product" />

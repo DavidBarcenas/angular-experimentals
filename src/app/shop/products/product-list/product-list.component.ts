@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../service/product.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CategoryService } from '../service/category.service';
+import { CategoriesComponent } from '../../categories/categories.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [
-    CommonModule,
     ProductDetailComponent,
     ProductCardComponent,
     RouterLink,
     RouterLinkActive,
+    CategoriesComponent,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
@@ -31,7 +31,6 @@ export class ProductListComponent {
   private router = inject(Router);
 
   readonly products = this.productService.products;
-  readonly categories = this.categoryService.categories;
 
   errorMessage = '';
 
