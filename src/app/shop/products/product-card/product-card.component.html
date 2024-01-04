@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" @fadeIn>
   <img
     [ngSrc]="product.images[0]"
     [alt]="product.title"
@@ -10,6 +10,6 @@
   <p class="class__description">{{ product.description }}</p>
   <footer class="card__footer">
     <strong class="card__price">{{ product.price | currency }}</strong>
-    <button (click)="addToCart($event)" class="card__button">Add to Cart</button>
+    <button (click)="open($event)" class="card__button">Add to Cart</button>
   </footer>
 </div>
