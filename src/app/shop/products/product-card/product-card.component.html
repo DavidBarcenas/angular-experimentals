@@ -1,9 +1,15 @@
 <div class="card">
-  <img [src]="product.images[0]" [alt]="product.title" />
-  <h2>{{ product.title }}</h2>
-  <p>{{ product.description }}</p>
-  <footer class="card-footer">
-    <strong>{{ product.price | currency }}</strong>
-    <button (click)="addToCart($event)">Add to Cart</button>
+  <img
+    [ngSrc]="product.images[0]"
+    [alt]="product.title"
+    width="330"
+    height="248"
+    class="card__image"
+  />
+  <h2 class="card__title">{{ product.title }}</h2>
+  <p class="class__description">{{ product.description }}</p>
+  <footer class="card__footer">
+    <strong class="card__price">{{ product.price | currency }}</strong>
+    <button (click)="addToCart($event)" class="card__button">Add to Cart</button>
   </footer>
 </div>

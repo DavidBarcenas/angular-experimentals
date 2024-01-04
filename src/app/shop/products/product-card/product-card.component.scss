@@ -2,23 +2,25 @@
   cursor: pointer;
 
   &:hover {
-    img {
+    .card__image {
       transition: opacity 0.2s ease-in-out;
       opacity: 0.75;
     }
   }
-  img {
+  &__image {
     border-radius: 1rem;
     margin-bottom: 1rem;
+    aspect-ratio: 4/3;
+    object-fit: cover;
   }
 
-  h2,
-  strong {
+  &__title,
+  &__price {
     font-weight: 600;
     font-size: 1.25rem;
   }
 
-  p {
+  &__description {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -27,7 +29,14 @@
     overflow: hidden;
   }
 
-  button {
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0.5rem;
+  }
+
+  &__button {
     background: #000;
     border: none;
     border-radius: 0.2rem;
@@ -39,12 +48,5 @@
     &:hover {
       background: #6e49fe;
     }
-  }
-
-  &-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 0.5rem;
   }
 }
