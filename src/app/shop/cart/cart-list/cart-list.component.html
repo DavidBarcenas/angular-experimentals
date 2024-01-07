@@ -1,1 +1,33 @@
-<p>cart-list works!</p>
+<article>
+  <h2 class="cart__title">Your Cart</h2>
+  <ul>
+    @for (item of cartItems(); track item.product.id) {
+      <li class="item">
+        <img [src]="item.product.images[0]" [alt]="item.product.title" class="item__image" />
+        <div class="item__details">
+          <div class="item__header">
+            <h3 class="item__title">{{ item.product.title }}</h3>
+            <strong class="item__price">{{ item.product.price | currency }}</strong>
+          </div>
+          <div>
+            <span class="item__option">Variant: Oversize</span>
+            <span class="item__option">Size: XL</span>
+            <span class="item__option">Color: Cream</span>
+          </div>
+          <div class="item__footer">
+            <button (click)="removeFromCart(item)" class="btn--remove">✖️Remove</button>
+            <div>
+              <button (click)="subtractQuantity(item)" class="quantity__btn">⎻</button>
+              <strong class="quantity__total">{{ item.quantity }}</strong>
+              <button (click)="addQuantity(item)" class="quantity__btn">✛</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    } @empty {
+      <li class="list--empty">
+        No items in cart
+      </li>
+    }
+  </ul>
+</article>
