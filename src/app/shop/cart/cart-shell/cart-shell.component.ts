@@ -1,35 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CartService } from '../service/cart.service';
-import { CartItem } from '../cart';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CartListComponent } from '../cart-list/cart-list.component';
+import { CartSummaryComponent } from '../cart-summary/cart-summary.component';
 
 @Component({
   selector: 'app-cart-shell',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CartListComponent, CartSummaryComponent],
   templateUrl: './cart-shell.component.html',
   styleUrl: './cart-shell.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartShellComponent {
-  private cartService = inject(CartService);
-  cartItems = this.cartService.cartItems;
-  subTotal = this.cartService.subTotal;
-  deliveryFee = this.cartService.deliveryFee;
-  tax = this.cartService.tax;
-  total = this.cartService.total;
-
-  addQuantity(cartItem: CartItem): void {
-    this.cartService.updateQuantity(cartItem, cartItem.quantity + 1);
-  }
-
-  subtractQuantity(cartItem: CartItem): void {
-    if (cartItem.quantity > 1) {
-      this.cartService.updateQuantity(cartItem, cartItem.quantity - 1);
-    }
-  }
-
-  removeFromCart(cartItem: CartItem): void {
-    this.cartService.removeFromCart(cartItem);
-  }
-}
+export class CartShellComponent {}

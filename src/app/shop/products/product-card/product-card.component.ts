@@ -29,9 +29,4 @@ export class ProductCardComponent {
     event.stopPropagation();
     this.cartService.addToCart(this.product);
   }
-
-  open(event: Event) {
-    event.stopPropagation();
-    this.trigger = !this.trigger;
-  }
 }
