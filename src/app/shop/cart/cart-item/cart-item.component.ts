@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cart-item.component.html',
-  styleUrl: './cart-item.component.scss'
+  styleUrl: './cart-item.component.scss',
 })
-export class CartItemComponent {
-
-}
+export class CartItemComponent {}
