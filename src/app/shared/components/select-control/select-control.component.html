@@ -1,1 +1,26 @@
-<p>select-control works!</p>
+<div
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+  class="select">
+  <span>{{ value }}</span>
+</div>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayWidth]="defaultWidth"
+  [cdkConnectedOverlayOffsetY]="8"
+  (overlayOutsideClick)="close()"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+>
+  <div
+    @dropdown
+    class="select__panel">
+    <ul>
+      <li (click)="setValue('Products')"><span>Products</span></li>
+      <li (click)="setValue('Cart')"><span>Cart</span></li>
+      <li (click)="setValue('Items')"><span>Items</span></li>
+    </ul>
+  </div>
+</ng-template>
