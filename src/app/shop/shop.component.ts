@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { LogoComponent } from '../core/components/logo/logo.component';
+import { LogoComponent } from '../shared/components/logo/logo.component';
 import { CartService } from './cart/service/cart.service';
 
 @Component({
