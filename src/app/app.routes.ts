@@ -10,4 +10,8 @@ export const routes: Routes = [
     path: 'tasks',
     loadComponent: () => import('./tasks/tasks.component').then((c) => c.TasksComponent),
   },
+  {
+    path: 'ui-components',
+    loadComponent: () => import('./shared/pages/ui/ui.component').then((c) => c.UiComponent),
+  },
 ];
