@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   HostListener,
   Input,
   ViewChild,
@@ -9,6 +10,7 @@ import {
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgForOf, NgIf } from '@angular/common';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 interface Option {
   value: string;
@@ -35,21 +37,33 @@ interface Option {
 export class SelectControlComponent implements AfterViewInit {
   @ViewChild('trigger') parent!: CdkOverlayOrigin;
   @Input() options: Option[] = [];
-
+  @Input() placeholder = 'Selecciona una opción';
+  @Input()
+  set disabled(value: BooleanInput) {
+    this._disabled = coerceBooleanProperty(value);
+  }
+  get disabled() {
+    return this._disabled;
+  }
+  @HostBinding('class.disabled')
+  private _disabled = false;
   isOpen = false;
   defaultWidth = 'auto';
   value = '';
 
   @HostListener('click')
   open() {
+    if (this.disabled) {
+      return;
+    }
     this.isOpen = true;
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.defaultWidth = this.parent?.elementRef.nativeElement.getBoundingClientRect().width + 'px';
   }
 
-  setValue(option: Option) {
+  setValue(option: Option): void {
     if (option.disabled) {
       return;
     }
@@ -57,7 +71,7 @@ export class SelectControlComponent implements AfterViewInit {
     this.close();
   }
 
-  close() {
+  close(): void {
     this.isOpen = false;
   }
 }
