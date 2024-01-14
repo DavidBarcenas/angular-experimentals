@@ -3,15 +3,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  Input,
   ViewChild,
 } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NgForOf, NgIf } from '@angular/common';
+
+interface Option {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
 
 @Component({
   selector: 'app-select-control',
   standalone: true,
-  imports: [CdkOverlayOrigin, CdkConnectedOverlay],
+  imports: [CdkOverlayOrigin, CdkConnectedOverlay, NgForOf, NgIf],
   templateUrl: './select-control.component.html',
   styleUrl: './select-control.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,10 +34,11 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class SelectControlComponent implements AfterViewInit {
   @ViewChild('trigger') parent!: CdkOverlayOrigin;
+  @Input() options: Option[] = [];
 
   isOpen = false;
   defaultWidth = 'auto';
-  value = 'Placeholder';
+  value = '';
 
   @HostListener('click')
   open() {
@@ -40,8 +49,11 @@ export class SelectControlComponent implements AfterViewInit {
     this.defaultWidth = this.parent?.elementRef.nativeElement.getBoundingClientRect().width + 'px';
   }
 
-  setValue(value: string) {
-    this.value = value;
+  setValue(option: Option) {
+    if (option.disabled) {
+      return;
+    }
+    this.value = option.label;
     this.close();
   }
 

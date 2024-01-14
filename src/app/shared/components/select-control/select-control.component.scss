@@ -1,13 +1,51 @@
 .select {
-  border: 1px solid #000;
+  border: 1px solid #ccc;
   border-radius: .2rem;
   cursor: pointer;
-  padding: .5rem 0;
+  padding: .5rem 1rem;
+  position: relative;
+  text-align: left;
+
+  &__label {
+    color: #000;
+
+    &--empty {
+      color: #cccccc;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    transition: transform 120ms cubic-bezier(0, 0, 0.2, 1);
+
+    &--rotate {
+      transform: rotateZ(180deg);
+    }
+  }
 }
 
 .select__panel {
-  border: 1px solid #000;
-  padding: 1rem;
+  border: 1px solid #ccc;
+  padding: .5rem;
   transform-origin: top left;
   width: 100%;
+}
+
+.option {
+  cursor: pointer;
+  padding: .5rem;
+
+  &:hover {
+    background: #f6f6f6;
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
 }

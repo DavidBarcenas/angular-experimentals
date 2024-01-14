@@ -1,26 +1,35 @@
-<div
-  cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin"
-  class="select">
-  <span>{{ value }}</span>
+<div cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="select">
+  <span class="select__label" [class.select__label--empty]="!value">{{ value || 'Placeholder' }}</span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    class="select__icon"
+    [class.select__icon--rotate]="isOpen"
+  >
+    <path d="M12 17.414 3.293 8.707l1.414-1.414L12 14.586l7.293-7.293 1.414 1.414L12 17.414z" />
+  </svg>
 </div>
 <ng-template
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isOpen"
   [cdkConnectedOverlayWidth]="defaultWidth"
-  [cdkConnectedOverlayOffsetY]="8"
+  [cdkConnectedOverlayOffsetY]="2"
   (overlayOutsideClick)="close()"
   [cdkConnectedOverlayHasBackdrop]="true"
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
 >
-  <div
-    @dropdown
-    class="select__panel">
+  <div *ngIf="options.length" @dropdown class="select__panel">
     <ul>
-      <li (click)="setValue('Products')"><span>Products</span></li>
-      <li (click)="setValue('Cart')"><span>Cart</span></li>
-      <li (click)="setValue('Items')"><span>Items</span></li>
+      <li
+        *ngFor="let option of options"
+        (click)="setValue(option)"
+        [attr.aria-disabled]="option.disabled"
+        class="option"
+      >
+        <span class="option__item">{{ option.label }}</span>
+      </li>
     </ul>
   </div>
 </ng-template>
