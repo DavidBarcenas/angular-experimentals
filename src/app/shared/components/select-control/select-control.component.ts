@@ -11,6 +11,7 @@ import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgForOf, NgIf } from '@angular/common';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Option {
   value: string;
@@ -33,8 +34,15 @@ interface Option {
       transition(':leave', [animate('100ms linear')]),
     ]),
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: SelectControlComponent,
+      multi: true,
+    },
+  ],
 })
-export class SelectControlComponent implements AfterViewInit {
+export class SelectControlComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('trigger') parent!: CdkOverlayOrigin;
   @Input() options: Option[] = [];
   @Input() placeholder = 'Selecciona una opción';
@@ -45,8 +53,13 @@ export class SelectControlComponent implements AfterViewInit {
   get disabled() {
     return this._disabled;
   }
+
   @HostBinding('class.disabled')
   private _disabled = false;
+
+  protected onChange: (newValue: string) => void = () => {};
+  protected onTouched: () => void = () => {};
+
   isOpen = false;
   defaultWidth = 'auto';
   value = '';
@@ -61,6 +74,25 @@ export class SelectControlComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.defaultWidth = this.parent?.elementRef.nativeElement.getBoundingClientRect().width + 'px';
+  }
+
+  writeValue(value: string): void {
+    const optionValue = this.options.find(
+      (item) => item.value?.toLowerCase() === value?.toLowerCase()
+    );
+    this.value = optionValue?.label || '';
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   setValue(option: Option): void {

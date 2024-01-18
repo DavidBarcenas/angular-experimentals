@@ -1,4 +1,5 @@
 <h2>UI Components</h2>
 <div class="container">
-  <app-select-control [options]="options" />
+  <app-select-control [formControl]="mySelect" [options]="options" />
+  <pre>{{mySelect.value}}</pre>
 </div>
