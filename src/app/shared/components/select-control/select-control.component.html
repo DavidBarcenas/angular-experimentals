@@ -1,6 +1,6 @@
 <div cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="select">
   <ng-container *ngIf="value; else showPlaceholder">
-    <span class="select__label">{{ value }}</span>
+    <span class="select__label">{{ displayLabel }}</span>
   </ng-container>
   <ng-template #showPlaceholder>
     <span class="select__placeholder">{{ placeholder }}</span>

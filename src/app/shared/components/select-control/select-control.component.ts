@@ -46,6 +46,24 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
   @ViewChild('trigger') parent!: CdkOverlayOrigin;
   @Input() options: Option[] = [];
   @Input() placeholder = 'Selecciona una opción';
+
+  private _value = '';
+  displayLabel = '';
+
+  @Input()
+  set value(value: string) {
+    const optionValue = this.options.find(
+      (item) => item.value?.toLowerCase() === value?.toLowerCase()
+    );
+    this._value = optionValue?.value || '';
+    this.displayLabel = optionValue?.label || '';
+    this.onChange(this._value);
+  }
+
+  get value() {
+    return this._value;
+  }
+
   @Input()
   set disabled(value: BooleanInput) {
     this._disabled = coerceBooleanProperty(value);
@@ -62,7 +80,6 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
 
   isOpen = false;
   defaultWidth = 'auto';
-  value = '';
 
   @HostListener('click')
   open() {
@@ -80,7 +97,8 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
     const optionValue = this.options.find(
       (item) => item.value?.toLowerCase() === value?.toLowerCase()
     );
-    this.value = optionValue?.label || '';
+    this.value = optionValue?.value || '';
+    this.displayLabel = optionValue?.label || '';
   }
 
   registerOnChange(fn: any): void {
@@ -99,7 +117,7 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
     if (option.disabled) {
       return;
     }
-    this.value = option.label;
+    this.value = option.value;
     this.close();
   }
 
