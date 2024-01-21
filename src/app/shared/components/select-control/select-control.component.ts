@@ -14,7 +14,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Option {
-  value: string;
+  value: string | number;
   label: string;
   disabled?: boolean;
 }
@@ -47,13 +47,13 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
   @Input() options: Option[] = [];
   @Input() placeholder = 'Selecciona una opción';
 
-  private _value = '';
+  private _value: string | number = '';
   displayLabel = '';
 
   @Input()
-  set value(value: string) {
+  set value(value: string | number) {
     const optionValue = this.options.find(
-      (item) => item.value?.toLowerCase() === value?.toLowerCase()
+      (item) => item.value?.toString()?.toLowerCase() === value?.toString().toLowerCase()
     );
     this._value = optionValue?.value || '';
     this.displayLabel = optionValue?.label || '';
@@ -75,7 +75,7 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
   @HostBinding('class.disabled')
   private _disabled = false;
 
-  protected onChange: (newValue: string) => void = () => {};
+  protected onChange: (newValue: string | number) => void = () => {};
   protected onTouched: () => void = () => {};
 
   isOpen = false;
@@ -95,7 +95,7 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
 
   writeValue(value: string): void {
     const optionValue = this.options.find(
-      (item) => item.value?.toLowerCase() === value?.toLowerCase()
+      (item) => item.value?.toString()?.toLowerCase() === value?.toLowerCase()
     );
     this.value = optionValue?.value || '';
     this.displayLabel = optionValue?.label || '';
@@ -118,6 +118,7 @@ export class SelectControlComponent implements ControlValueAccessor, AfterViewIn
       return;
     }
     this.value = option.value;
+    this.displayLabel = option.label || '';
     this.close();
   }
 
