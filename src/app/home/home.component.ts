@@ -16,7 +16,7 @@ export class HomeComponent {
     { title: 'Shop', link: '/shop' },
     { title: 'Task list', link: '/tasks' },
     { title: 'UI Components', link: '/ui-components' },
-    { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
+    { title: 'Exploration', link: '/exploration' },
     { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
   ];
 }

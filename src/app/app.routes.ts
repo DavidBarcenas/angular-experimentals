@@ -14,4 +14,9 @@ export const routes: Routes = [
     path: 'ui-components',
     loadComponent: () => import('./shared/pages/ui/ui.component').then((c) => c.UiComponent),
   },
+  {
+    path: 'exploration',
+    loadComponent: () =>
+      import('./exploration/exploration.component').then((c) => c.ExplorationComponent),
+  },
 ];
