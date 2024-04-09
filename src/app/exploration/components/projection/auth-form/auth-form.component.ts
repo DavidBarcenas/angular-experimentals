@@ -1,7 +1,7 @@
-import { NgIf } from '@angular/common';
-import { AfterContentInit, Component, ContentChild, output } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ViewChild, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthRememberComponent } from '../auth-remember/auth-remember.component';
+import { AuthMessageComponent } from '../auth-message/auth-message.component';
 
 interface User {
   email: string;
@@ -11,7 +11,6 @@ interface User {
 @Component({
   selector: 'app-auth-form',
   standalone: true,
-  imports: [FormsModule, NgIf],
   template: `
     <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
       <ng-content select="h3" />
@@ -24,18 +23,23 @@ interface User {
         <input type="password" name="password" ngModel />
       </label>
       <ng-content select="app-auth-remember" />
-      <p *ngIf="showMessage">You will be logged in for 30 days</p>
+      <app-auth-message [hidden]="!showMessage" />
       <ng-content select="button" />
     </form>
   `,
   styleUrl: './auth-form.component.scss',
+  imports: [FormsModule, AuthMessageComponent],
 })
 export class AuthFormComponent implements AfterContentInit {
+  @ViewChild(AuthMessageComponent) message: AuthMessageComponent | undefined;
   @ContentChild(AuthRememberComponent) remember: AuthRememberComponent | undefined;
   submitted = output<User>();
   showMessage = false;
 
   ngAfterContentInit() {
+    if (this.message) {
+      this.message.days = 30;
+    }
     if (this.remember) {
       this.remember.checked.subscribe((checked) => (this.showMessage = checked));
     }
