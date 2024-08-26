@@ -16,7 +16,6 @@ export const routes: Routes = [
   },
   {
     path: 'discover',
-    loadChildren: () =>
-      import('./discover/discover.routes').then((c) => c.routes),
+    loadChildren: () => import('./discover/discover.routes').then((c) => c.routes),
   },
 ];

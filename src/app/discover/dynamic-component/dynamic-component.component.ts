@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './dynamic-component.component.html',
-  styles: ``
+  styles: ``,
 })
-export class DynamicComponentComponent {
-
-}
+export class DynamicComponentComponent {}
