@@ -15,8 +15,8 @@ export const routes: Routes = [
     loadComponent: () => import('./shared/pages/ui/ui.component').then((c) => c.UiComponent),
   },
   {
-    path: 'exploration',
-    loadComponent: () =>
-      import('./exploration/exploration.component').then((c) => c.ExplorationComponent),
+    path: 'discover',
+    loadChildren: () =>
+      import('./discover/discover.routes').then((c) => c.routes),
   },
 ];

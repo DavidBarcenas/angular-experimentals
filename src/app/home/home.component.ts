@@ -13,10 +13,10 @@ import { LogoComponent } from '../shared/components/logo/logo.component';
 export class HomeComponent {
   title = 'angular-labs';
   pills = [
+    { title: 'Discover', link: '/discover' },
     { title: 'Shop', link: '/shop' },
     { title: 'Task list', link: '/tasks' },
     { title: 'UI Components', link: '/ui-components' },
-    { title: 'Exploration', link: '/exploration' },
     { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
   ];
 }
