@@ -1,1 +1,25 @@
-<p>dynamic-component works!</p>
+<section
+  class="bg-gradient-to-bl from-blue-500 to-blue-200 h-dvh w-dvw text-center pt-10 pb-6 px-4"
+>
+  <h2 class="font-semibold text-3xl text-white mb-8">Dynamic Component</h2>
+  <main>
+    <section class="mb-10">
+      <button
+        (click)="createComponent()"
+        class="bg-white px-4 py-2 rounded-sm mr-5 cursor-pointer hover:bg-white/90"
+      >
+        Create component
+      </button>
+      <button
+        (click)="destroyComponent()"
+        class="border border-white px-4 py-2 rounded-sm text-white cursor-pointer hover:bg-white/20"
+      >
+        Destroy component
+      </button>
+    </section>
+    <ng-template #content>
+      <app-widget-content></app-widget-content>
+    </ng-template>
+    <ng-container #container />
+  </main>
+</section>
