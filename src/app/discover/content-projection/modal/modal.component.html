@@ -1,0 +1,14 @@
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-gray-100 text-center rounded-2xl shadow">
+  <div class="border-b border-b-gray-200 p-4">
+    <ng-content select="[slot='header']" />
+  </div>
+  <div class="px-6 py-8">
+    <ng-content>
+      <p class="text-gray-400 bg-gray-50 min-w-80 border border-dashed py-7 block">No content</p>
+    </ng-content>
+    <app-button>
+      <ng-content ngProjectAs="[slot='text']" select="[slot='action-text']" />
+      <ng-content ngProjectAs="[slot='icon']" select="[slot='action-icon']" />
+    </app-button>
+  </div>
+</div>
