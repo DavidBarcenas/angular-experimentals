@@ -11,7 +11,14 @@ export const routes: Routes = [
             (c) => c.DynamicComponentComponent
           ),
       },
-      { path: '', redirectTo: 'dynamic-component', pathMatch: 'full' },
+      {
+        path: 'content-projection',
+        loadComponent: () =>
+          import('./content-projection/content-projection.component').then(
+            (c) => c.ContentProjectionComponent
+          ),
+      },
+      { path: '', redirectTo: 'content-projection', pathMatch: 'full' },
     ],
   },
 ];
